@@ -1,0 +1,7 @@
+execução
+python simulador.py <cache_size> <line_size> <group_size> <access_file> > output.txt
+
+ou 
+
+python3 simulador.py <cache_size> <line_size> <group_size> <access_file> > output.txt
+
