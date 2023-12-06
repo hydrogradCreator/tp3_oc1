@@ -55,6 +55,7 @@ class CacheSimulator:
         for i in range(group_index, group_index + self.group_size):
             if not self.lines[i].valid:
                 self.lines[i].update(block_address)
+                print({block_address})
                 return
         # Replace the first line in the group
         self.lines[group_index].update(block_address)
@@ -66,7 +67,7 @@ class CacheSimulator:
         print("================")
         print("IDX V ** ADDR **")
         for idx, line in enumerate(self.lines):
-            print(f"{idx:03} {line}")
+            print(f"{idx:03} {line} ")
 
     def print_hits_miss(self): 
         print(f"#hits: {self.hits} \n#miss: {self.misses}")
