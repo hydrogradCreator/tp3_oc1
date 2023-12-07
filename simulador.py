@@ -1,8 +1,6 @@
 import sys
 
 OUTPUT = "output.txt"
-
-
 class CacheLine:
     def __init__(self):
         self.valid = 0
@@ -45,10 +43,10 @@ class CacheSimulator:
         for i in range(start_index, end_index):
             line = self.lines[i]
             if line.valid and line.block_address == block_address:
-                cont = 0
+                # cont = 0
                 self.hits += 1
-                cont = cont + 1
-                return cont  # Hit found
+                # cont = cont + 1
+                return   # Hit found
 
         # Miss: Replace the oldest line in the group
         self.misses += 1
@@ -74,7 +72,7 @@ class CacheSimulator:
             file.write(f"{idx:03} {line}\n")
 
     def print_hits_miss(self, file):
-        file.write(f"#hits: {self.hits}\n#miss: {self.misses}")
+        file.write(f"\n#hits: {self.hits}\n#miss: {self.misses}")
 
 
 def main():
@@ -96,19 +94,8 @@ def main():
             for line in file:
                 address = int(line.strip(), 16)
                 cont = simulator.access_memory(address)
-                print(f"{cont}")
-
-                # Remova a próxima linha se não quiser imprimir as estatísticas após cada acesso
-
-                # Processar a linha aqui
-                if (
-                    file.readline() == "" and cont == 1
-                ):  # Checagem se a próxima linha é o final do arquivo
-                    print("Estou na última linha.")
-                    break
-
-                else:
-                    simulator.print_stats(file_out)
+                # print(f"{cont}")
+                simulator.print_stats(file_out)
 
             simulator.print_hits_miss(file_out)
 
