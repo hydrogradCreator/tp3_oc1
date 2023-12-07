@@ -99,7 +99,7 @@ def main():
                 if file.readline() == '' and cont == 1:  # Checagem se a próxima linha é o final do arquivo
                     print("Estou na última linha.")
                     break
-simulador2
+
                 else:
                     simulator.print_stats(file_out)
 
