@@ -4,7 +4,8 @@ python simulador.py <cache_size> <line_size> <group_size> <access_file> > output
 ou 
 
 python3 simulador.py <cache_size> <line_size> <group_size> <access_file> > output.txt
-
+python3 simulador.py    4096        1024           2        entrada_3.txt 
+python3 simulador.py    4096        1024           4        entrada_6.txt 
 
 Exemplos 1-4
 1) O tamanho total da cache, em bytes: 4096
@@ -30,3 +31,6 @@ Exemplo 3 Done !
 Exemplo 4 Done !
 Exemplo 5 
 Exemplo 6 O indice não está alocando da forma correta
+
+
+
