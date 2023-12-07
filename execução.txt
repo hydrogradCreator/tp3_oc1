@@ -5,3 +5,20 @@ ou
 
 python3 simulador.py <cache_size> <line_size> <group_size> <access_file> > output.txt
 
+
+Exemplos 1-4
+1) O tamanho total da cache, em bytes: 4096
+2) O tamanho de cada linha, em bytes: 1024
+3) O tamanho de cada grupo, em unidades: 4
+
+Exemplos 5:
+Parâmetros
+1) O tamanho total da cache, em bytes: 4096
+2) O tamanho de cada linha, em bytes: 1024
+3) O tamanho de cada grupo, em unidades: 2
+
+Exemplo 6:
+Parâmetros
+1) O tamanho total da cache, em bytes: 4096
+2) O tamanho de cada linha, em bytes: 1024
+3) O tamanho de cada grupo, em unidades: 2
