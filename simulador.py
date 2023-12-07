@@ -1,6 +1,7 @@
 import sys
 
-OUTPUT="output.txt"
+OUTPUT = "output.txt"
+
 
 class CacheLine:
     def __init__(self):
@@ -14,10 +15,15 @@ class CacheLine:
         self.insertion_order = insertion_order
 
     def __str__(self):
-        addr_str = f"{self.valid} 0x{self.block_address:08X}" if self.valid else f"{self.valid}"
+        addr_str = (
+            f"{self.valid} 0x{self.block_address:08X}"
+            if self.valid
+            else f"{self.valid}"
+        )
 
         return addr_str
-        #return f"{self.valid}{addr_str}"
+        # return f"{self.valid}{addr_str}"
+
 
 class CacheSimulator:
     def __init__(self, cache_size, line_size, group_size):
@@ -42,12 +48,12 @@ class CacheSimulator:
                 cont = 0
                 self.hits += 1
                 cont = cont + 1
-                return  cont# Hit found
+                return cont  # Hit found
 
         # Miss: Replace the oldest line in the group
         self.misses += 1
         oldest_line_index = None
-        oldest_insertion_order = float('inf')
+        oldest_insertion_order = float("inf")
 
         for i in range(start_index, end_index):
             line = self.lines[i]
@@ -67,36 +73,37 @@ class CacheSimulator:
         for idx, line in enumerate(self.lines):
             file.write(f"{idx:03} {line}\n")
 
-    def print_hits_miss(self, file): 
+    def print_hits_miss(self, file):
         file.write(f"#hits: {self.hits}\n#miss: {self.misses}")
+
 
 def main():
     if len(sys.argv) != 5:
-        print("Usage: python simulador.py <cache_size> <line_size> <group_size> <access_file>")
+        print(
+            "Usage: python simulador.py <cache_size> <line_size> <group_size> <access_file>"
+        )
         sys.exit(1)
 
-    
-   
     cache_size = int(sys.argv[1])
     line_size = int(sys.argv[2])
     group_size = int(sys.argv[3])
     access_file = sys.argv[4]
 
-
     simulator = CacheSimulator(cache_size, line_size, group_size)
-    
-    with open(OUTPUT, 'w') as file_out:
 
-        with open(access_file, 'r') as file:
+    with open(OUTPUT, "w") as file_out:
+        with open(access_file, "r") as file:
             for line in file:
                 address = int(line.strip(), 16)
                 cont = simulator.access_memory(address)
                 print(f"{cont}")
 
                 # Remova a próxima linha se não quiser imprimir as estatísticas após cada acesso
-                
+
                 # Processar a linha aqui
-                if file.readline() == '' and cont == 1:  # Checagem se a próxima linha é o final do arquivo
+                if (
+                    file.readline() == "" and cont == 1
+                ):  # Checagem se a próxima linha é o final do arquivo
                     print("Estou na última linha.")
                     break
 
@@ -105,9 +112,9 @@ def main():
 
             simulator.print_hits_miss(file_out)
 
+
 if __name__ == "__main__":
     main()
-
 
 
 # with open(access_file, 'r') as file:
