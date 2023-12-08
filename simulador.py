@@ -3,6 +3,7 @@ import math
 
 OUTPUT = "output.txt"
 
+
 class CacheLine:
     def __init__(self):
         self.valid = 0
@@ -41,14 +42,14 @@ class CacheSimulator:
         group_index = block_address_operator % (self.line_count // self.group_size)
 
         start_index = group_index * self.group_size
-        
+
         end_index = start_index + self.group_size
 
         for i in range(start_index, end_index):
             line = self.lines[i]
             if line.valid and line.block_address == block_address:
                 self.hits += 1
-                return   # Hit found
+                return  # Hit found
 
         # Miss: Replace the oldest line in the group
         self.misses += 1
