@@ -2,6 +2,7 @@ import sys
 import math
 
 OUTPUT = "output.txt"
+
 class CacheLine:
     def __init__(self):
         self.valid = 0
@@ -21,7 +22,6 @@ class CacheLine:
         )
 
         return addr_str
-        # return f"{self.valid}{addr_str}"
 
 
 class CacheSimulator:
@@ -36,27 +36,16 @@ class CacheSimulator:
 
     def access_memory(self, address):
         block_address = address // self.line_size
-        block_address2 = math.ceil(address / self.line_size)
-        print(f'block_address: {block_address}')
-        print(f'block_address_calculado: {block_address2}')
-        print(f'line_size: {self.line_size}')
+        block_address_operator = math.ceil(address / self.line_size)
 
-        # group_index = 0
-        group_index = block_address2 % (self.line_count // self.group_size)
-        print(f'group_index: {group_index}')
-        print(f'line_count: {self.line_count}')
-        print(f'group_size: {self.group_size}\n')
+        group_index = block_address_operator % (self.line_count // self.group_size)
 
-        
         start_index = group_index * self.group_size
-        print(f'start_index: {start_index}')
         
         end_index = start_index + self.group_size
-        print(f'end_index: {end_index}')
 
         for i in range(start_index, end_index):
             line = self.lines[i]
-            print(f'line: {line}')
             if line.valid and line.block_address == block_address:
                 self.hits += 1
                 return   # Hit found
@@ -82,7 +71,6 @@ class CacheSimulator:
         file.write("================\n")
         file.write("IDX V ** ADDR **\n")
         for idx, line in enumerate(self.lines):
-            print(f'index: {idx}, line: {line}')
             file.write(f"{idx:03} {line}\n")
 
     def print_hits_miss(self, file):
@@ -106,9 +94,7 @@ def main():
     with open(OUTPUT, "w") as file_out:
         with open(access_file, "r") as file:
             for line in file:
-                print(f'\nfull_address: {line}')
                 address = int(line.strip(), 16)
-                print(f'address: {address}')
                 simulator.access_memory(address)
                 simulator.print_stats(file_out)
 
@@ -117,19 +103,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# with open(access_file, 'r') as file:
-#             lines = file.readlines()  # Lê todas as linhas do arquivo de uma vez
-
-#         for i, line in enumerate(lines):
-#             address = int(line.strip(), 16)
-#             hit = simulator.access_memory(address)  # Retorna 1 se for um HIT, caso contrário 0
-
-#             # Se estiver na última linha E for um HIT, não escreva no arquivo
-#             if i == len(lines) - 1 and hit:
-#                 break
-#             else:
-#                 simulator.print_stats(file_out)
-
-#         simulator.print_hits_miss(file_out)
